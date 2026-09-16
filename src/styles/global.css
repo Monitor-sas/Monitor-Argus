@@ -213,7 +213,7 @@ body {
 }
 
 .brand-tagline {
-	margin-top: var(--sp-1);
+
 	font-size: var(--fs-sm);
 	color: var(--color-muted);
 }
