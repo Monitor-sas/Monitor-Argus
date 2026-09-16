@@ -55,7 +55,7 @@ async function run() {
 	let response = await fetch(`${BASE}/`);
 	const html = await response.text();
 	check("HTML incluye botones del theme switcher", html.includes("data-theme-option"));
-	check("HTML incluye logo del proyecto", html.includes("logo-word"));
+	check("HTML incluye logo del proyecto", html.includes("cls-2"));
 	check("HTML incluye script boot de tema", html.includes("argus:theme"));
 
 	response = await fetch(`${BASE}/api/v1/ingest/frontend`, { method: "OPTIONS" });

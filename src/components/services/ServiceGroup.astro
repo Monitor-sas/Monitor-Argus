@@ -1,4 +1,5 @@
 ---
+import { t } from "lingui-for-astro/macro";
 import type { ServiceStatusResult } from "../../types";
 import ServiceStatusRow from "./ServiceStatusRow.astro";
 
@@ -10,7 +11,7 @@ interface Props {
 const { name, services } = Astro.props;
 ---
 
-<section class="service-group" aria-label={`${name} services`}>
+<section class="service-group" aria-label={t`${name} services`}>
 	<h2 class="group-title">{name}</h2>
 	<ul class="group-card">
 		{services.map((service) => <ServiceStatusRow service={service} />)}

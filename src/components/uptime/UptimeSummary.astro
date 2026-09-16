@@ -1,9 +1,13 @@
-<section class="summary-section" aria-label="Uptime history">
-	<h2 class="section-title">Uptime history</h2>
+---
+import { t } from "lingui-for-astro/macro";
+---
+
+<section class="summary-section" aria-label={t`Uptime history`}>
+	<h2 class="section-title">{t`Uptime history`}</h2>
 	<div class="empty-card">
-		<p class="empty-title">No historical data yet</p>
+		<p class="empty-title">{t`No historical data yet`}</p>
 		<p class="empty-body">
-			Uptime history will appear here once monitoring data has been collected.
+			{t`Uptime history will appear here once monitoring data has been collected.`}
 		</p>
 	</div>
 </section>

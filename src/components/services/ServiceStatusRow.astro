@@ -1,5 +1,6 @@
 ---
-import { formatRelativeTime, formatResponseTime, getStatusLabel } from "../../lib/utils/status";
+import { plural, t } from "lingui-for-astro/macro";
+import { relativeTimeParts } from "../../lib/utils/status";
 import type { ServiceStatusResult } from "../../types";
 
 interface Props {
@@ -9,6 +10,38 @@ interface Props {
 const { service } = Astro.props;
 
 const error = service.checks.find((c) => c.error)?.error;
+
+const STATUS_LABELS: Record<string, string> = {
+	operational: t`Operational`,
+	degraded: t`Degraded Performance`,
+	partial_outage: t`Partial Outage`,
+	major_outage: t`Major Outage`,
+	unknown: t`Status Unknown`,
+};
+
+function relativeTimeLabel(iso: string): string {
+	const parts = relativeTimeParts(iso);
+	if (parts.kind === "now") {
+		return t`just now`;
+	}
+	switch (parts.kind) {
+		case "s":
+			return plural(parts.value, { one: "# second ago", other: "# seconds ago" });
+		case "m":
+			return plural(parts.value, { one: "# minute ago", other: "# minutes ago" });
+		case "h":
+			return plural(parts.value, { one: "# hour ago", other: "# hours ago" });
+		case "d":
+			return plural(parts.value, { one: "# day ago", other: "# days ago" });
+	}
+}
+
+function responseTimeLabel(ms: number): string {
+	if (ms < 1000) {
+		return t`${ms} ms`;
+	}
+	return t`${(ms / 1000).toFixed(1)} s`;
+}
 
 function detailsLine(): string | undefined {
 	const d = service.details;
@@ -25,10 +58,10 @@ function detailsLine(): string | undefined {
 		parts.push(d.platform);
 	}
 	if (typeof d.api_latency_ms === "number") {
-		parts.push(`API ${d.api_latency_ms}ms`);
+		parts.push(t`API ${d.api_latency_ms}ms`);
 	}
 	if (typeof d.lastHeartbeatTs === "string") {
-		parts.push(`beat ${formatRelativeTime(d.lastHeartbeatTs)}`);
+		parts.push(t`beat ${relativeTimeLabel(d.lastHeartbeatTs)}`);
 	}
 
 	return parts.length > 0 ? parts.join(" · ") : undefined;
@@ -49,10 +82,10 @@ const details = detailsLine();
 	</span>
 	<span class="service-meta">
 		{service.responseTimeMs !== undefined && (
-			<span class="service-time">{formatResponseTime(service.responseTimeMs)}</span>
+			<span class="service-time">{responseTimeLabel(service.responseTimeMs)}</span>
 		)}
 		<span class="status-text" data-status={service.status}>
-			{getStatusLabel(service.status)}
+			{STATUS_LABELS[service.status]}
 		</span>
 	</span>
 </li>

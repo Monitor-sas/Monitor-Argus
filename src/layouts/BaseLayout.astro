@@ -1,6 +1,8 @@
 ---
-import ThemeSwitcher from "../components/ThemeSwitcher.astro";
+import { getLinguiContext } from "lingui-for-astro";
+import { t } from "lingui-for-astro/macro";
 import MonitorLogo from "../assets/monitor_logo.svg";
+import ThemeSwitcher from "../components/ThemeSwitcher.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -9,14 +11,16 @@ interface Props {
 }
 
 const {
-	title = "ARGUS — Monitor Status",
-	description = "Public operational status of the Monitor platform",
+	title = t`ARGUS — Monitor Status`,
+	description = t`Public operational status of the Monitor platform`,
 } = Astro.props;
+const { i18n } = getLinguiContext(Astro.locals);
+const lang = i18n.locale;
 const year = new Date().getFullYear();
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -49,7 +53,7 @@ const year = new Date().getFullYear();
 						</span>
 					</a>
 				</h1>
-				<p class="brand-tagline">System Operational Status</p>
+				<p class="brand-tagline">{t`System Operational Status`}</p>
 				</div>
 				<ThemeSwitcher />
 			</div>
@@ -61,9 +65,9 @@ const year = new Date().getFullYear();
 		</main>
 		<footer class="site-footer">
 			<div class="container">
-				<span>&copy; {year} Monitor</span>
-				<nav class="footer-nav" aria-label="Footer">
-					<a href="/">Status</a>
+				<span>&copy; {year} {t`Monitor`}</span>
+				<nav class="footer-nav" aria-label={t`Footer`}>
+					<a href="/">{t`Status`}</a>
 					<a href="/api/status">API</a>
 				</nav>
 			</div>

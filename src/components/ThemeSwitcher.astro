@@ -1,12 +1,14 @@
 ---
+import { t } from "lingui-for-astro/macro";
+
 const themes = [
-	{ value: "system", label: "System", title: "Follow system theme" },
-	{ value: "light", label: "Light", title: "Light theme" },
-	{ value: "dark", label: "Dark", title: "Dark theme" },
+	{ value: "system", label: t`System`, title: t`Follow system theme` },
+	{ value: "light", label: t`Light`, title: t`Light theme` },
+	{ value: "dark", label: t`Dark`, title: t`Dark theme` },
 ];
 ---
 
-<div class="theme-switch" role="group" aria-label="Theme">
+<div class="theme-switch" role="group" aria-label={t`Theme`}>
 	{themes.map((t) => (
 		<button
 			type="button"

@@ -208,12 +208,8 @@ body {
 	font-weight: 400;
 }
 
-.brand a:hover {
-	color: var(--color-amber-deep);
-}
-
 .brand-tagline {
-
+	margin-top: var(--sp-1);
 	font-size: var(--fs-sm);
 	color: var(--color-muted);
 }
@@ -319,6 +315,23 @@ body {
 	border: 1px solid var(--color-border);
 	border-radius: var(--radius-lg);
 	background: var(--color-surface);
+}
+
+.page-intro {
+	margin-bottom: var(--sp-5);
+	max-width: 64ch;
+}
+
+.intro-title {
+	margin: 0 0 var(--sp-1);
+	font-size: var(--fs-xl);
+	font-weight: 700;
+	letter-spacing: -0.01em;
+}
+
+.intro-description {
+	margin: 0;
+	color: var(--color-secondary);
 }
 
 .banner[data-status="operational"] {

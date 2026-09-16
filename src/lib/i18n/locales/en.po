@@ -1,0 +1,189 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-09-15 23:00-0500\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#. placeholder {0}: parts.value
+#: src/components/services/ServiceStatusRow.astro:35
+msgid "{0, plural, one {# day ago} other {# days ago}}"
+msgstr "{0, plural, one {# day ago} other {# days ago}}"
+
+#. placeholder {0}: parts.value
+#: src/components/services/ServiceStatusRow.astro:33
+msgid "{0, plural, one {# hour ago} other {# hours ago}}"
+msgstr "{0, plural, one {# hour ago} other {# hours ago}}"
+
+#. placeholder {0}: parts.value
+#: src/components/services/ServiceStatusRow.astro:31
+msgid "{0, plural, one {# minute ago} other {# minutes ago}}"
+msgstr "{0, plural, one {# minute ago} other {# minutes ago}}"
+
+#. placeholder {0}: parts.value
+#: src/components/services/ServiceStatusRow.astro:29
+msgid "{0, plural, one {# second ago} other {# seconds ago}}"
+msgstr "{0, plural, one {# second ago} other {# seconds ago}}"
+
+#. placeholder {0}: (ms / 1000).toFixed(1)
+#: src/components/services/ServiceStatusRow.astro:43
+msgid "{0} s"
+msgstr "{0} s"
+
+#: src/components/services/ServiceStatusRow.astro:41
+msgid "{ms} ms"
+msgstr "{ms} ms"
+
+#: src/components/services/ServiceGroup.astro:14
+msgid "{name} services"
+msgstr "{name} services"
+
+#: src/components/status/StatusBanner.astro:15
+msgid "All systems operational"
+msgstr "All systems operational"
+
+#. placeholder {0}: d.api_latency_ms
+#: src/components/services/ServiceStatusRow.astro:61
+msgid "API {0}ms"
+msgstr "API {0}ms"
+
+#: src/layouts/BaseLayout.astro:14
+msgid "ARGUS — Monitor Status"
+msgstr "ARGUS — Monitor Status"
+
+#. placeholder {0}: relativeTimeLabel(d.lastHeartbeatTs)
+#: src/components/services/ServiceStatusRow.astro:64
+msgid "beat {0}"
+msgstr "beat {0}"
+
+#: src/components/ThemeSwitcher.astro:7
+msgid "Dark"
+msgstr "Dark"
+
+#: src/components/ThemeSwitcher.astro:7
+msgid "Dark theme"
+msgstr "Dark theme"
+
+#: src/components/services/ServiceStatusRow.astro:16
+msgid "Degraded Performance"
+msgstr "Degraded Performance"
+
+#: src/components/ThemeSwitcher.astro:5
+msgid "Follow system theme"
+msgstr "Follow system theme"
+
+#: src/layouts/BaseLayout.astro:69
+msgid "Footer"
+msgstr "Footer"
+
+#: src/components/incidents/IncidentsSection.astro:5
+#: src/components/incidents/IncidentsSection.astro:6
+msgid "Incidents"
+msgstr "Incidents"
+
+#: src/components/incidents/IncidentsSection.astro:9
+msgid "Incidents are published here when they affect service availability."
+msgstr "Incidents are published here when they affect service availability."
+
+#: src/pages/index.astro:14
+msgid "Infrastructure"
+msgstr "Infrastructure"
+
+#: src/components/services/ServiceStatusRow.astro:25
+msgid "just now"
+msgstr "just now"
+
+#: src/components/status/StatusBanner.astro:29
+msgid "Last checked {checkedAtText}"
+msgstr "Last checked {checkedAtText}"
+
+#: src/components/ThemeSwitcher.astro:6
+msgid "Light"
+msgstr "Light"
+
+#: src/components/ThemeSwitcher.astro:6
+msgid "Light theme"
+msgstr "Light theme"
+
+#: src/components/services/ServiceStatusRow.astro:18
+msgid "Major Outage"
+msgstr "Major Outage"
+
+#: src/components/status/StatusBanner.astro:18
+msgid "Major system outage"
+msgstr "Major system outage"
+
+#: src/layouts/BaseLayout.astro:68
+msgid "Monitor"
+msgstr "Monitor"
+
+#: src/pages/index.astro:31
+msgid "Monitor Status"
+msgstr "Monitor Status"
+
+#: src/components/incidents/IncidentsSection.astro:8
+msgid "No active incidents"
+msgstr "No active incidents"
+
+#: src/components/uptime/UptimeSummary.astro:8
+msgid "No historical data yet"
+msgstr "No historical data yet"
+
+#: src/components/services/ServiceStatusRow.astro:15
+msgid "Operational"
+msgstr "Operational"
+
+#: src/components/services/ServiceStatusRow.astro:17
+msgid "Partial Outage"
+msgstr "Partial Outage"
+
+#: src/layouts/BaseLayout.astro:15
+msgid "Public operational status of the Monitor platform"
+msgstr "Public operational status of the Monitor platform"
+
+#: src/pages/index.astro:33
+msgid "Real-time operational status of the Monitor platform and its services."
+msgstr "Real-time operational status of the Monitor platform and its services."
+
+#: src/components/status/StatusBanner.astro:17
+msgid "Some systems are experiencing an outage"
+msgstr "Some systems are experiencing an outage"
+
+#: src/components/status/StatusBanner.astro:16
+msgid "Some systems are experiencing degraded performance"
+msgstr "Some systems are experiencing degraded performance"
+
+#: src/layouts/BaseLayout.astro:70
+msgid "Status"
+msgstr "Status"
+
+#: src/components/services/ServiceStatusRow.astro:19
+msgid "Status Unknown"
+msgstr "Status Unknown"
+
+#: src/components/ThemeSwitcher.astro:5
+msgid "System"
+msgstr "System"
+
+#: src/layouts/BaseLayout.astro:56
+msgid "System Operational Status"
+msgstr "System Operational Status"
+
+#: src/components/status/StatusBanner.astro:19
+msgid "System status is currently unknown"
+msgstr "System status is currently unknown"
+
+#: src/components/ThemeSwitcher.astro:11
+msgid "Theme"
+msgstr "Theme"
+
+#: src/components/uptime/UptimeSummary.astro:5
+#: src/components/uptime/UptimeSummary.astro:6
+msgid "Uptime history"
+msgstr "Uptime history"
+
+#: src/components/uptime/UptimeSummary.astro:10
+msgid "Uptime history will appear here once monitoring data has been collected."
+msgstr "Uptime history will appear here once monitoring data has been collected."

@@ -1,5 +1,6 @@
 ---
-import { formatTimestamp, getOverallStatusLabel } from "../../lib/utils/status";
+import { getLinguiContext } from "lingui-for-astro";
+import { t } from "lingui-for-astro/macro";
 import type { OverallStatus } from "../../types";
 
 interface Props {
@@ -8,12 +9,26 @@ interface Props {
 }
 
 const { status, checkedAt } = Astro.props;
+const { i18n } = getLinguiContext(Astro.locals);
+
+const OVERALL_LABELS: Record<OverallStatus, string> = {
+	operational: t`All systems operational`,
+	degraded: t`Some systems are experiencing degraded performance`,
+	partial_outage: t`Some systems are experiencing an outage`,
+	major_outage: t`Major system outage`,
+	unknown: t`System status is currently unknown`,
+};
+
+const checkedAtText = new Intl.DateTimeFormat(i18n.locale, {
+	dateStyle: "medium",
+	timeStyle: "medium",
+}).format(new Date(checkedAt));
 ---
 
 <section class="banner" data-status={status}>
 	<span class="banner-dot" data-status={status} aria-hidden="true"></span>
 	<div class="banner-copy">
-		<p class="banner-title" role="status">{getOverallStatusLabel(status)}</p>
-		<p class="banner-last-checked">Last checked {formatTimestamp(checkedAt)}</p>
+		<p class="banner-title" role="status">{OVERALL_LABELS[status]}</p>
+		<p class="banner-last-checked">{t`Last checked ${checkedAtText}`}</p>
 	</div>
 </section>

@@ -1,7 +1,11 @@
-<section class="summary-section" aria-label="Incidents">
-	<h2 class="section-title">Incidents</h2>
+---
+import { t } from "lingui-for-astro/macro";
+---
+
+<section class="summary-section" aria-label={t`Incidents`}>
+	<h2 class="section-title">{t`Incidents`}</h2>
 	<div class="empty-card">
-		<p class="empty-title">No active incidents</p>
-		<p class="empty-body">Incidents are published here when they affect service availability.</p>
+		<p class="empty-title">{t`No active incidents`}</p>
+		<p class="empty-body">{t`Incidents are published here when they affect service availability.`}</p>
 	</div>
 </section>

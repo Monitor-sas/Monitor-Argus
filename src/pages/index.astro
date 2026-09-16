@@ -1,4 +1,5 @@
 ---
+import { t } from "lingui-for-astro/macro";
 import IncidentsSection from "../components/incidents/IncidentsSection.astro";
 import ServiceGroup from "../components/services/ServiceGroup.astro";
 import StatusBanner from "../components/status/StatusBanner.astro";
@@ -9,6 +10,14 @@ import type { ServiceStatusResult } from "../types";
 
 const report = await getCurrentStatus();
 
+const groupLabels: Record<string, string> = {
+	Infrastructure: t`Infrastructure`,
+};
+
+function displayGroupName(name: string): string {
+	return groupLabels[name] ?? name;
+}
+
 const groups = new Map<string, ServiceStatusResult[]>();
 for (const service of report.services) {
 	const group = groups.get(service.group) ?? [];
@@ -18,9 +27,15 @@ for (const service of report.services) {
 ---
 
 <BaseLayout>
+	<section class="page-intro">
+		<h2 class="intro-title">{t`Monitor Status`}</h2>
+		<p class="intro-description">
+			{t`Real-time operational status of the Monitor platform and its services.`}
+		</p>
+	</section>
 	<StatusBanner status={report.status} checkedAt={report.checkedAt} />
 	{[...groups.entries()].map(([name, services]) => (
-		<ServiceGroup name={name} services={services} />
+		<ServiceGroup name={displayGroupName(name)} services={services} />
 	))}
 	<UptimeSummary />
 	<IncidentsSection />

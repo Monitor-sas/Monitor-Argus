@@ -25,7 +25,8 @@
 			"!**/dist",
 			"!**/.astro",
 			"!**/.vercel",
-			"!**/src/assets"
+			"!**/src/assets",
+			"!**/src/lib/i18n/locales"
 		]
 	},
 	"overrides": [
