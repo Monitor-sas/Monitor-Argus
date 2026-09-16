@@ -15,7 +15,7 @@ const upstreamStatusMapping: Record<string, ServiceStatus> = {
 export const services: ServiceConfig[] = [
 	{
 		id: "venus",
-		name: "Monitor Venus",
+		name: "Venus",
 		group: "Monitor Platform",
 		description: "Frontend application",
 		enabled: true,
@@ -29,7 +29,7 @@ export const services: ServiceConfig[] = [
 	},
 	{
 		id: "atlas",
-		name: "Atlas API",
+		name: "Atlas",
 		group: "Monitor Platform",
 		description: "Monitor backend API",
 		enabled: true,

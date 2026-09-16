@@ -19,6 +19,13 @@ const STATUS_LABELS: Record<string, string> = {
 	unknown: t`Status Unknown`,
 };
 
+const DESCRIPTION_LABELS: Record<string, string> = {
+	"Frontend application": t`Frontend application`,
+	"Monitor backend API": t`Monitor backend API`,
+	"Real-time service": t`Real-time service`,
+	"LoRaWAN network server": t`LoRaWAN network server`,
+};
+
 function relativeTimeLabel(iso: string): string {
 	const parts = relativeTimeParts(iso);
 	if (parts.kind === "now") {
@@ -75,7 +82,11 @@ const details = detailsLine();
 		<span class="status-indicator" data-status={service.status} aria-hidden="true"></span>
 		<span class="service-name-text">
 			<span class="service-name-label">{service.name}</span>
-			{service.description && <span class="service-description">{service.description}</span>}
+			{service.description && (
+				<span class="service-description">
+					{DESCRIPTION_LABELS[service.description] ?? service.description}
+				</span>
+			)}
 			{details && <span class="service-details">{details}</span>}
 			{error && <span class="service-error">{error}</span>}
 		</span>

@@ -1,0 +1,41 @@
+---
+import { t } from "lingui-for-astro/macro";
+
+interface Props {
+	lang: "en" | "es";
+}
+
+const { lang } = Astro.props;
+
+const languages = [
+	{ value: "en", label: "EN", title: t`English` },
+	{ value: "es", label: "ES", title: t`Español` },
+];
+---
+
+<div class="lang-switch" role="group" aria-label={t`Language`}>
+	{languages.map((language) => (
+		<button
+			type="button"
+			class:list={{ "is-active": language.value === lang }}
+			data-lang-option={language.value}
+			aria-pressed={language.value === lang ? "true" : "false"}
+			title={language.title}
+		>
+			<span class="lang-label">{language.label}</span>
+		</button>
+	))}
+</div>
+
+<script is:inline>
+	document.querySelectorAll("[data-lang-option]").forEach((button) => {
+		button.addEventListener("click", () => {
+			const lang = button.getAttribute("data-lang-option") || "en";
+			document.cookie =
+				"argus:lang=" +
+				lang +
+				";path=/;max-age=31536000;SameSite=Lax";
+			location.reload();
+		});
+	});
+</script>

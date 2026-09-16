@@ -6,33 +6,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: es\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
 
 #. placeholder {0}: parts.value
-#: src/components/services/ServiceStatusRow.astro:35
+#: src/components/services/ServiceStatusRow.astro:42
 msgid "{0, plural, one {# day ago} other {# days ago}}"
 msgstr "{0, plural, one {hace # día} other {hace # días}}"
 
 #. placeholder {0}: parts.value
-#: src/components/services/ServiceStatusRow.astro:33
+#: src/components/services/ServiceStatusRow.astro:40
 msgid "{0, plural, one {# hour ago} other {# hours ago}}"
 msgstr "{0, plural, one {hace # hora} other {hace # horas}}"
 
 #. placeholder {0}: parts.value
-#: src/components/services/ServiceStatusRow.astro:31
+#: src/components/services/ServiceStatusRow.astro:38
 msgid "{0, plural, one {# minute ago} other {# minutes ago}}"
 msgstr "{0, plural, one {hace # minuto} other {hace # minutos}}"
 
 #. placeholder {0}: parts.value
-#: src/components/services/ServiceStatusRow.astro:29
+#: src/components/services/ServiceStatusRow.astro:36
 msgid "{0, plural, one {# second ago} other {# seconds ago}}"
 msgstr "{0, plural, one {hace # segundo} other {hace # segundos}}"
 
 #. placeholder {0}: (ms / 1000).toFixed(1)
-#: src/components/services/ServiceStatusRow.astro:43
+#: src/components/services/ServiceStatusRow.astro:50
 msgid "{0} s"
 msgstr "{0} s"
 
-#: src/components/services/ServiceStatusRow.astro:41
+#: src/components/services/ServiceStatusRow.astro:48
 msgid "{ms} ms"
 msgstr "{ms} ms"
 
@@ -45,16 +51,16 @@ msgid "All systems operational"
 msgstr "Todos los sistemas operativos"
 
 #. placeholder {0}: d.api_latency_ms
-#: src/components/services/ServiceStatusRow.astro:61
+#: src/components/services/ServiceStatusRow.astro:68
 msgid "API {0}ms"
 msgstr "API {0}ms"
 
-#: src/layouts/BaseLayout.astro:14
+#: src/layouts/BaseLayout.astro:15
 msgid "ARGUS — Monitor Status"
 msgstr "ARGUS — Estado de Monitor"
 
 #. placeholder {0}: relativeTimeLabel(d.lastHeartbeatTs)
-#: src/components/services/ServiceStatusRow.astro:64
+#: src/components/services/ServiceStatusRow.astro:71
 msgid "beat {0}"
 msgstr "latido {0}"
 
@@ -70,13 +76,25 @@ msgstr "Tema oscuro"
 msgid "Degraded Performance"
 msgstr "Rendimiento degradado"
 
+#: src/components/LanguageSwitcher.astro:11
+msgid "English"
+msgstr "Inglés"
+
+#: src/components/LanguageSwitcher.astro:12
+msgid "Español"
+msgstr "Español"
+
 #: src/components/ThemeSwitcher.astro:5
 msgid "Follow system theme"
 msgstr "Seguir el tema del sistema"
 
-#: src/layouts/BaseLayout.astro:69
+#: src/layouts/BaseLayout.astro:73
 msgid "Footer"
 msgstr "Pie de página"
+
+#: src/components/services/ServiceStatusRow.astro:23
+msgid "Frontend application"
+msgstr "Aplicación frontend"
 
 #: src/components/incidents/IncidentsSection.astro:5
 #: src/components/incidents/IncidentsSection.astro:6
@@ -91,11 +109,15 @@ msgstr "Las incidencias se publican aquí cuando afectan a la disponibilidad del
 msgid "Infrastructure"
 msgstr "Infraestructura"
 
-#: src/components/services/ServiceStatusRow.astro:25
+#: src/components/services/ServiceStatusRow.astro:32
 msgid "just now"
 msgstr "ahora mismo"
 
-#: src/components/status/StatusBanner.astro:29
+#: src/components/LanguageSwitcher.astro:16
+msgid "Language"
+msgstr "Idioma"
+
+#: src/components/status/StatusBanner.astro:32
 msgid "Last checked {checkedAtText}"
 msgstr "Última comprobación: {checkedAtText}"
 
@@ -107,6 +129,10 @@ msgstr "Claro"
 msgid "Light theme"
 msgstr "Tema claro"
 
+#: src/components/services/ServiceStatusRow.astro:26
+msgid "LoRaWAN network server"
+msgstr "Servidor de red LoRaWAN"
+
 #: src/components/services/ServiceStatusRow.astro:18
 msgid "Major Outage"
 msgstr "Interrupción mayor"
@@ -115,9 +141,13 @@ msgstr "Interrupción mayor"
 msgid "Major system outage"
 msgstr "Interrupción mayor del sistema"
 
-#: src/layouts/BaseLayout.astro:68
+#: src/layouts/BaseLayout.astro:72
 msgid "Monitor"
 msgstr "Monitor"
+
+#: src/components/services/ServiceStatusRow.astro:24
+msgid "Monitor backend API"
+msgstr "API de backend de Monitor"
 
 #: src/pages/index.astro:31
 msgid "Monitor Status"
@@ -139,13 +169,17 @@ msgstr "Operativo"
 msgid "Partial Outage"
 msgstr "Interrupción parcial"
 
-#: src/layouts/BaseLayout.astro:15
+#: src/layouts/BaseLayout.astro:16
 msgid "Public operational status of the Monitor platform"
 msgstr "Estado operativo público de la plataforma Monitor"
 
 #: src/pages/index.astro:33
 msgid "Real-time operational status of the Monitor platform and its services."
 msgstr "Estado operativo en tiempo real de la plataforma Monitor y sus servicios."
+
+#: src/components/services/ServiceStatusRow.astro:25
+msgid "Real-time service"
+msgstr "Servicio en tiempo real"
 
 #: src/components/status/StatusBanner.astro:17
 msgid "Some systems are experiencing an outage"
@@ -155,7 +189,7 @@ msgstr "Algunos sistemas están experimentando una interrupción"
 msgid "Some systems are experiencing degraded performance"
 msgstr "Algunos sistemas presentan rendimiento degradado"
 
-#: src/layouts/BaseLayout.astro:70
+#: src/layouts/BaseLayout.astro:74
 msgid "Status"
 msgstr "Estado"
 
@@ -167,7 +201,7 @@ msgstr "Estado desconocido"
 msgid "System"
 msgstr "Sistema"
 
-#: src/layouts/BaseLayout.astro:56
+#: src/layouts/BaseLayout.astro:57
 msgid "System Operational Status"
 msgstr "Estado Operativo del Sistema"
 

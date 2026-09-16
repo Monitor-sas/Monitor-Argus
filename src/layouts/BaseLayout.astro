@@ -2,6 +2,7 @@
 import { getLinguiContext } from "lingui-for-astro";
 import { t } from "lingui-for-astro/macro";
 import MonitorLogo from "../assets/monitor_logo.svg";
+import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import ThemeSwitcher from "../components/ThemeSwitcher.astro";
 import "../styles/global.css";
 
@@ -15,7 +16,7 @@ const {
 	description = t`Public operational status of the Monitor platform`,
 } = Astro.props;
 const { i18n } = getLinguiContext(Astro.locals);
-const lang = i18n.locale;
+const lang = i18n.locale as "en" | "es";
 const year = new Date().getFullYear();
 ---
 
@@ -55,7 +56,10 @@ const year = new Date().getFullYear();
 				</h1>
 				<p class="brand-tagline">{t`System Operational Status`}</p>
 				</div>
-				<ThemeSwitcher />
+				<div class="header-controls">
+					<LanguageSwitcher lang={lang} />
+					<ThemeSwitcher />
+				</div>
 			</div>
 		</header>
 		<main class="site-main">
