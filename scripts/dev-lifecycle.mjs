@@ -1,4 +1,4 @@
-import { astro, DEV_PORT, killByPort } from "./lib.mjs";
+import { astro, DEV_PORT, killByPort, loadLocalEnv } from "./lib.mjs";
 
 const [command, ...rest] = process.argv.slice(2);
 const arg = (name, fallback) => {
@@ -13,6 +13,7 @@ function usage() {
 }
 
 if (command === "dev") {
+	loadLocalEnv();
 	const child = astro(["dev", "--port", String(port)]);
 	for (const signal of ["SIGINT", "SIGTERM"]) {
 		process.on(signal, () => {

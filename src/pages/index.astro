@@ -11,6 +11,8 @@ import type { ServiceStatusResult } from "../types";
 
 const report = await getCurrentStatus();
 
+const isAdmin = Astro.locals.admin;
+
 const groupLabels: Record<string, string> = {
 	Infrastructure: t`Infrastructure`,
 };
@@ -33,12 +35,38 @@ for (const service of report.services) {
 		<p class="intro-description">
 			{t`Real-time operational status of the Monitor platform and its services.`}
 		</p>
+		{isAdmin && (
+			<button type="button" class="admin-lock" data-admin-lock>
+				{t`Lock`}
+			</button>
+		)}
 	</section>
 	<StatusBanner status={report.status} checkedAt={report.checkedAt} />
 	{[...groups.entries()].map(([name, services]) => (
-		<ServiceGroup name={displayGroupName(name)} services={services} />
+		<ServiceGroup name={displayGroupName(name)} services={services} admin={isAdmin} />
 	))}
-	<ServiceDetailsDialog />
+	{isAdmin && <ServiceDetailsDialog />}
 	<UptimeSummary />
 	<IncidentsSection />
 </BaseLayout>
+
+{isAdmin && (
+	<script is:inline>
+		document.addEventListener("DOMContentLoaded", () => {
+			const lockButton = document.querySelector("[data-admin-lock]");
+			if (lockButton) {
+				lockButton.addEventListener("click", async () => {
+					try {
+						await fetch("/api/v1/status/admin/unlock", {
+							method: "POST",
+							headers: { "Content-Type": "application/json" },
+							body: JSON.stringify({ action: "lock" }),
+						});
+					} finally {
+						window.location.reload();
+					}
+				});
+			}
+		});
+	</script>
+)}

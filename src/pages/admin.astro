@@ -1,0 +1,68 @@
+---
+import { t } from "lingui-for-astro/macro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+if (Astro.locals.admin) {
+	return Astro.redirect("/");
+}
+
+Astro.response.headers.set("X-Robots-Tag", "noindex, nofollow");
+Astro.response.headers.set("Cache-Control", "private, no-store");
+---
+
+<BaseLayout title={t`Admin access`}>
+	<section class="admin-lock-panel">
+		<h2 class="intro-title">{t`Admin access`}</h2>
+		<p class="intro-description">
+			{t`Enter the admin token to view service details.`}
+		</p>
+		<form class="admin-token-form" data-admin-token-form>
+			<label>
+				<span class="admin-token-label">{t`Admin token`}</span>
+				<input
+					type="password"
+					class="admin-token-input"
+					name="token"
+					autocomplete="off"
+					autocapitalize="off"
+					spellcheck="false"
+					required
+				/>
+			</label>
+			<button type="submit" class="admin-token-submit">{t`Unlock`}</button>
+		</form>
+		<p class="admin-token-error" data-admin-token-error role="alert" hidden>
+			{t`Incorrect token`}
+		</p>
+	</section>
+</BaseLayout>
+
+<script is:inline>
+	document.addEventListener("DOMContentLoaded", () => {
+		const form = document.querySelector("[data-admin-token-form]");
+		const error = document.querySelector("[data-admin-token-error]");
+		const input = form?.querySelector("input[name=\"token\"]");
+		if (!(form instanceof HTMLFormElement) || !(error instanceof HTMLElement)) {
+			return;
+		}
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			const token = input && "value" in input ? input.value : "";
+			error.hidden = true;
+			try {
+				const response = await fetch("/api/v1/status/admin/unlock", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ token }),
+				});
+				if (response.ok) {
+					window.location.href = "/";
+					return;
+				}
+			} catch {
+				// fall through
+			}
+			error.hidden = false;
+		});
+	});
+</script>

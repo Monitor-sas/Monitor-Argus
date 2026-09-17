@@ -14,44 +14,53 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. placeholder {0}: parts.value
-#: src/components/services/ServiceStatusRow.astro:42
+#: src/components/services/ServiceStatusRow.astro:41
 msgid "{0, plural, one {# day ago} other {# days ago}}"
 msgstr "{0, plural, one {# day ago} other {# days ago}}"
 
 #. placeholder {0}: parts.value
-#: src/components/services/ServiceStatusRow.astro:40
+#: src/components/services/ServiceStatusRow.astro:39
 msgid "{0, plural, one {# hour ago} other {# hours ago}}"
 msgstr "{0, plural, one {# hour ago} other {# hours ago}}"
 
 #. placeholder {0}: parts.value
-#: src/components/services/ServiceStatusRow.astro:38
+#: src/components/services/ServiceStatusRow.astro:37
 msgid "{0, plural, one {# minute ago} other {# minutes ago}}"
 msgstr "{0, plural, one {# minute ago} other {# minutes ago}}"
 
 #. placeholder {0}: parts.value
-#: src/components/services/ServiceStatusRow.astro:36
+#: src/components/services/ServiceStatusRow.astro:35
 msgid "{0, plural, one {# second ago} other {# seconds ago}}"
 msgstr "{0, plural, one {# second ago} other {# seconds ago}}"
 
 #. placeholder {0}: (ms / 1000).toFixed(1)
-#: src/components/services/ServiceStatusRow.astro:50
+#: src/components/services/ServiceStatusRow.astro:49
 msgid "{0} s"
 msgstr "{0} s"
 
-#: src/components/services/ServiceStatusRow.astro:48
+#: src/components/services/ServiceStatusRow.astro:47
 msgid "{ms} ms"
 msgstr "{ms} ms"
 
-#: src/components/services/ServiceGroup.astro:15
+#: src/components/services/ServiceGroup.astro:16
 msgid "{name} services"
 msgstr "{name} services"
+
+#: src/pages/admin.astro:13
+#: src/pages/admin.astro:15
+msgid "Admin access"
+msgstr "Admin access"
+
+#: src/pages/admin.astro:21
+msgid "Admin token"
+msgstr "Admin token"
 
 #: src/components/status/StatusBanner.astro:15
 msgid "All systems operational"
 msgstr "All systems operational"
 
 #. placeholder {0}: d.api_latency_ms
-#: src/components/services/ServiceStatusRow.astro:68
+#: src/components/services/ServiceStatusRow.astro:67
 msgid "API {0}ms"
 msgstr "API {0}ms"
 
@@ -88,7 +97,7 @@ msgid "Authenticated"
 msgstr "Authenticated"
 
 #. placeholder {0}: relativeTimeLabel(d.lastHeartbeatTs)
-#: src/components/services/ServiceStatusRow.astro:71
+#: src/components/services/ServiceStatusRow.astro:70
 msgid "beat {0}"
 msgstr "beat {0}"
 
@@ -113,13 +122,17 @@ msgid "Dark theme"
 msgstr "Dark theme"
 
 #: src/components/services/ServiceDetailsPanel.astro:15
-#: src/components/services/ServiceStatusRow.astro:16
+#: src/components/services/ServiceStatusRow.astro:15
 msgid "Degraded Performance"
 msgstr "Degraded Performance"
 
 #: src/components/LanguageSwitcher.astro:11
 msgid "English"
 msgstr "English"
+
+#: src/pages/admin.astro:17
+msgid "Enter the admin token to view service details."
+msgstr "Enter the admin token to view service details."
 
 #: src/components/LanguageSwitcher.astro:12
 msgid "Español"
@@ -137,7 +150,7 @@ msgstr "Footer"
 msgid "Frontend"
 msgstr "Frontend"
 
-#: src/components/services/ServiceStatusRow.astro:23
+#: src/components/services/ServiceStatusRow.astro:22
 msgid "Frontend application"
 msgstr "Frontend application"
 
@@ -162,11 +175,15 @@ msgstr "Incidents"
 msgid "Incidents are published here when they affect service availability."
 msgstr "Incidents are published here when they affect service availability."
 
-#: src/pages/index.astro:15
+#: src/pages/admin.astro:35
+msgid "Incorrect token"
+msgstr "Incorrect token"
+
+#: src/pages/index.astro:17
 msgid "Infrastructure"
 msgstr "Infrastructure"
 
-#: src/components/services/ServiceStatusRow.astro:32
+#: src/components/services/ServiceStatusRow.astro:31
 msgid "just now"
 msgstr "just now"
 
@@ -194,12 +211,16 @@ msgstr "Light"
 msgid "Light theme"
 msgstr "Light theme"
 
-#: src/components/services/ServiceStatusRow.astro:26
+#: src/pages/index.astro:40
+msgid "Lock"
+msgstr "Lock"
+
+#: src/components/services/ServiceStatusRow.astro:25
 msgid "LoRaWAN network server"
 msgstr "LoRaWAN network server"
 
 #: src/components/services/ServiceDetailsPanel.astro:17
-#: src/components/services/ServiceStatusRow.astro:18
+#: src/components/services/ServiceStatusRow.astro:17
 msgid "Major Outage"
 msgstr "Major Outage"
 
@@ -211,11 +232,11 @@ msgstr "Major system outage"
 msgid "Monitor"
 msgstr "Monitor"
 
-#: src/components/services/ServiceStatusRow.astro:24
+#: src/components/services/ServiceStatusRow.astro:23
 msgid "Monitor backend API"
 msgstr "Monitor backend API"
 
-#: src/pages/index.astro:32
+#: src/pages/index.astro:34
 msgid "Monitor Status"
 msgstr "Monitor Status"
 
@@ -232,12 +253,12 @@ msgid "No historical data yet"
 msgstr "No historical data yet"
 
 #: src/components/services/ServiceDetailsPanel.astro:14
-#: src/components/services/ServiceStatusRow.astro:15
+#: src/components/services/ServiceStatusRow.astro:14
 msgid "Operational"
 msgstr "Operational"
 
 #: src/components/services/ServiceDetailsPanel.astro:16
-#: src/components/services/ServiceStatusRow.astro:17
+#: src/components/services/ServiceStatusRow.astro:16
 msgid "Partial Outage"
 msgstr "Partial Outage"
 
@@ -249,11 +270,11 @@ msgstr "Platform"
 msgid "Public operational status of the Monitor platform"
 msgstr "Public operational status of the Monitor platform"
 
-#: src/pages/index.astro:34
+#: src/pages/index.astro:36
 msgid "Real-time operational status of the Monitor platform and its services."
 msgstr "Real-time operational status of the Monitor platform and its services."
 
-#: src/components/services/ServiceStatusRow.astro:25
+#: src/components/services/ServiceStatusRow.astro:24
 msgid "Real-time service"
 msgstr "Real-time service"
 
@@ -284,7 +305,7 @@ msgid "Status"
 msgstr "Status"
 
 #: src/components/services/ServiceDetailsPanel.astro:18
-#: src/components/services/ServiceStatusRow.astro:19
+#: src/components/services/ServiceStatusRow.astro:18
 msgid "Status Unknown"
 msgstr "Status Unknown"
 
@@ -303,6 +324,10 @@ msgstr "System status is currently unknown"
 #: src/components/ThemeSwitcher.astro:11
 msgid "Theme"
 msgstr "Theme"
+
+#: src/pages/admin.astro:32
+msgid "Unlock"
+msgstr "Unlock"
 
 #: src/components/uptime/UptimeSummary.astro:5
 #: src/components/uptime/UptimeSummary.astro:6

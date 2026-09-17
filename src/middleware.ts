@@ -2,6 +2,7 @@ import { defineMiddleware } from "astro:middleware";
 import { setupI18n } from "@lingui/core";
 import type { AstroCookies } from "astro";
 import { setLinguiContext } from "lingui-for-astro";
+import { ADMIN_COOKIE_NAME, verifyAdminCookieValue } from "./lib/auth/admin";
 import { catalogs } from "./lib/i18n/catalog";
 
 function resolveLocale(request: Request, cookies: AstroCookies): "en" | "es" {
@@ -22,5 +23,6 @@ export const onRequest = defineMiddleware((context, next) => {
 	const locale = resolveLocale(context.request, context.cookies);
 	const i18n = setupI18n({ locale, messages: catalogs });
 	setLinguiContext(context.locals, i18n);
+	context.locals.admin = verifyAdminCookieValue(context.cookies.get(ADMIN_COOKIE_NAME)?.value);
 	return next();
 });

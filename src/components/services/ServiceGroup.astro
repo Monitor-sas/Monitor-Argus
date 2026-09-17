@@ -7,19 +7,21 @@ import ServiceStatusRow from "./ServiceStatusRow.astro";
 interface Props {
 	name: string;
 	services: ServiceStatusResult[];
+	admin?: boolean;
 }
 
-const { name, services } = Astro.props;
+const { name, services, admin = false } = Astro.props;
 ---
 
 <section class="service-group" aria-label={t`${name} services`}>
 	<h2 class="group-title">{name}</h2>
 	<ul class="group-card">
-		{services.map((service) => <ServiceStatusRow service={service} />)}
+		{services.map((service) => <ServiceStatusRow service={service} admin={admin} />)}
 	</ul>
-	{services.map((service) => (
-		<template data-details-template={service.id}>
-			<ServiceDetailsPanel service={service} />
-		</template>
-	))}
+	{admin &&
+		services.map((service) => (
+			<template data-details-template={service.id}>
+				<ServiceDetailsPanel service={service} />
+			</template>
+		))}
 </section>

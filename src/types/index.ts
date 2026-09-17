@@ -25,6 +25,10 @@ export interface HttpHealthCheck {
 	expectedStatusCodes: number[];
 	headers?: Record<string, string>;
 	jsonBody?: JsonBodyEvaluation;
+	/** Guarda el cuerpo de la respuesta en details.raw_body (para el detalle en el modal). */
+	captureBody?: boolean;
+	/** Límite en bytes del cuerpo capturado (por defecto 8192). */
+	maxBodyBytes?: number;
 }
 
 export interface FrontendHealthCheck {

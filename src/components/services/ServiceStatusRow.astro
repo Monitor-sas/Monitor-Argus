@@ -5,11 +5,10 @@ import type { ServiceStatusResult } from "../../types";
 
 interface Props {
 	service: ServiceStatusResult;
+	admin?: boolean;
 }
 
-const { service } = Astro.props;
-
-const error = service.checks.find((c) => c.error)?.error;
+const { service, admin = false } = Astro.props;
 
 const STATUS_LABELS: Record<string, string> = {
 	operational: t`Operational`,
@@ -74,40 +73,65 @@ function detailsLine(): string | undefined {
 	return parts.length > 0 ? parts.join(" · ") : undefined;
 }
 
-const details = detailsLine();
+const details = admin ? detailsLine() : undefined;
+const error = admin ? service.checks.find((c) => c.error)?.error : undefined;
 ---
 
-<button
-	type="button"
-	class="service-row"
-	data-open-details
-	data-service-id={service.id}
-	aria-haspopup="dialog"
->
-	<span class="service-name">
-		<span class="status-indicator" data-status={service.status} aria-hidden="true"></span>
-		<span class="service-name-text">
-			<span class="service-name-label">{service.name}</span>
-			{service.description && (
-				<span class="service-description">
-					{DESCRIPTION_LABELS[service.description] ?? service.description}
-				</span>
+{admin ? (
+	<button
+		type="button"
+		class="service-row"
+		data-open-details
+		data-service-id={service.id}
+		aria-haspopup="dialog"
+	>
+		<span class="service-name">
+			<span class="status-indicator" data-status={service.status} aria-hidden="true"></span>
+			<span class="service-name-text">
+				<span class="service-name-label">{service.name}</span>
+				{service.description && (
+					<span class="service-description">
+						{DESCRIPTION_LABELS[service.description] ?? service.description}
+					</span>
+				)}
+				{details && <span class="service-details">{details}</span>}
+				{error && <span class="service-error">{error}</span>}
+			</span>
+		</span>
+		<span class="service-meta">
+			{service.responseTimeMs !== undefined && (
+				<span class="service-time">{responseTimeLabel(service.responseTimeMs)}</span>
 			)}
-			{details && <span class="service-details">{details}</span>}
-			{error && <span class="service-error">{error}</span>}
+			<span class="status-text" data-status={service.status}>
+				{STATUS_LABELS[service.status]}
+			</span>
+			<span class="service-chevron" aria-hidden="true">
+				<svg viewBox="0 0 24 24" focusable="false">
+					<path d="m9 18 6-6-6-6" />
+				</svg>
+			</span>
 		</span>
-	</span>
-	<span class="service-meta">
-		{service.responseTimeMs !== undefined && (
-			<span class="service-time">{responseTimeLabel(service.responseTimeMs)}</span>
-		)}
-		<span class="status-text" data-status={service.status}>
-			{STATUS_LABELS[service.status]}
+	</button>
+) : (
+	<div class="service-row service-row--readonly">
+		<span class="service-name">
+			<span class="status-indicator" data-status={service.status} aria-hidden="true"></span>
+			<span class="service-name-text">
+				<span class="service-name-label">{service.name}</span>
+				{service.description && (
+					<span class="service-description">
+						{DESCRIPTION_LABELS[service.description] ?? service.description}
+					</span>
+				)}
+			</span>
 		</span>
-		<span class="service-chevron" aria-hidden="true">
-			<svg viewBox="0 0 24 24" focusable="false">
-				<path d="m9 18 6-6-6-6" />
-			</svg>
+		<span class="service-meta">
+			{service.responseTimeMs !== undefined && (
+				<span class="service-time">{responseTimeLabel(service.responseTimeMs)}</span>
+			)}
+			<span class="status-text" data-status={service.status}>
+				{STATUS_LABELS[service.status]}
+			</span>
 		</span>
-	</span>
-</button>
+	</div>
+)}

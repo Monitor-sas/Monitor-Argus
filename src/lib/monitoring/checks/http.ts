@@ -50,6 +50,33 @@ async function evaluateBody(
 	return { status: "unknown", error: "Health-check response missing status field" };
 }
 
+const DEFAULT_CAPTURE_LIMIT = 8192;
+
+async function captureResponseBody(
+	response: Response,
+	maxBodyBytes: number | undefined,
+): Promise<Record<string, unknown> | undefined> {
+	const details: Record<string, unknown> = {};
+	const contentType = response.headers.get("content-type");
+	if (contentType) {
+		details.content_type = contentType;
+	}
+	let bodyText = "";
+	try {
+		bodyText = await response.text();
+	} catch {
+		bodyText = "";
+	}
+	const cap = maxBodyBytes ?? DEFAULT_CAPTURE_LIMIT;
+	if (bodyText.length > cap) {
+		details.raw_body = bodyText.slice(0, cap);
+		details.raw_body_truncated = true;
+	} else {
+		details.raw_body = bodyText;
+	}
+	return details;
+}
+
 export async function executeHttpCheck(
 	serviceId: string,
 	check: HttpHealthCheck,
@@ -86,7 +113,7 @@ export async function executeHttpCheck(
 		const status = classifyByStatusCode(response.status, check.expectedStatusCodes);
 
 		const details = check.captureBody
-			? await captureResponseBody(response)
+			? await captureResponseBody(response, check.maxBodyBytes)
 			: undefined;
 
 		return {

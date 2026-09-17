@@ -1,9 +1,11 @@
 import type { APIRoute } from "astro";
 import { getCurrentStatus } from "../../lib/monitoring/index.js";
 
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async ({ locals }) => {
 	try {
 		const report = await getCurrentStatus();
+
+		const isAdmin = locals.admin;
 
 		const payload = {
 			status: report.status,
@@ -14,15 +16,19 @@ export const GET: APIRoute = async () => {
 				group: s.group,
 				status: s.status,
 				responseTimeMs: s.responseTimeMs,
-				details: s.details,
+				...(isAdmin && s.details ? { details: s.details } : {}),
 			})),
 		};
+
+		const cacheControl = isAdmin
+			? "private, no-store"
+			: "public, max-age=30, s-maxage=30, stale-while-revalidate=60";
 
 		return new Response(JSON.stringify(payload), {
 			status: 200,
 			headers: {
 				"Content-Type": "application/json; charset=utf-8",
-				"Cache-Control": "public, max-age=30, s-maxage=30, stale-while-revalidate=60",
+				"Cache-Control": cacheControl,
 			},
 		});
 	} catch {

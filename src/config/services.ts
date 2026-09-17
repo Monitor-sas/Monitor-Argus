@@ -99,6 +99,7 @@ export const services: ServiceConfig[] = [
 				method: "GET",
 				timeoutMs: 5000,
 				expectedStatusCodes: [200],
+				captureBody: true,
 			},
 		],
 	},
