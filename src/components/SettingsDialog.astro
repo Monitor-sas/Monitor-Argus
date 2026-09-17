@@ -1,0 +1,90 @@
+---
+import { getLinguiContext } from "lingui-for-astro";
+import { t } from "lingui-for-astro/macro";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import ThemeSwitcher from "./ThemeSwitcher.astro";
+
+const { i18n } = getLinguiContext(Astro.locals);
+const lang = i18n.locale as "en" | "es";
+---
+
+<>
+	<button
+		type="button"
+		class="header-settings"
+		data-header-settings
+		aria-haspopup="dialog"
+		aria-label={t`Preferences`}
+		title={t`Preferences`}
+	>
+		<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+			<circle cx="12" cy="12" r="3" />
+			<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1Z" />
+		</svg>
+		<span class="header-settings-label">{t`Preferences`}</span>
+	</button>
+
+	<dialog class="settings-dialog" data-settings-dialog aria-label={t`Preferences`}>
+		<div class="settings-panel">
+			<header class="dialog-header">
+				<div class="dialog-heading">
+					<h3 class="dialog-title">{t`Preferences`}</h3>
+				</div>
+				<button
+					type="button"
+					class="dialog-close"
+					data-settings-close
+					aria-label={t`Close`}
+				>
+					<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+						<path d="M18 6 6 18M6 6l12 12" />
+					</svg>
+				</button>
+			</header>
+			<div class="dialog-body settings-body">
+				<section class="settings-group">
+					<h4 class="settings-group-title">{t`Language`}</h4>
+					<LanguageSwitcher lang={lang} />
+				</section>
+				<section class="settings-group">
+					<h4 class="settings-group-title">{t`Theme`}</h4>
+					<ThemeSwitcher />
+				</section>
+			</div>
+		</div>
+	</dialog>
+</>
+
+<script is:inline>
+	const settingsButton = document.querySelector("[data-header-settings]");
+	const settingsDialog = document.querySelector("[data-settings-dialog]");
+
+	if (settingsButton && settingsDialog) {
+		if (typeof settingsDialog.showModal === "function") {
+			settingsButton.addEventListener("click", () => {
+				if (!settingsDialog.open) {
+					settingsDialog.showModal();
+				}
+			});
+		} else {
+			settingsButton.addEventListener("click", () => {
+				settingsDialog.setAttribute("open", "");
+			});
+		}
+
+		settingsDialog.addEventListener("click", (event) => {
+			if (event.target === settingsDialog) {
+				settingsDialog.close();
+			}
+		});
+
+		settingsDialog.addEventListener("close", () => {
+			settingsButton.focus();
+		});
+
+		const closeButton = settingsDialog.querySelector("[data-settings-close]");
+		if (closeButton) {
+			closeButton.addEventListener("click", () => settingsDialog.close());
+		}
+	}
+</script>

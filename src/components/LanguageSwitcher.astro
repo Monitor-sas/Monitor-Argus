@@ -28,14 +28,17 @@ const languages = [
 </div>
 
 <script is:inline>
-	document.querySelectorAll("[data-lang-option]").forEach((button) => {
-		button.addEventListener("click", () => {
-			const lang = button.getAttribute("data-lang-option") || "en";
-			document.cookie =
-				"argus:lang=" +
-				lang +
-				";path=/;max-age=31536000;SameSite=Lax";
-			location.reload();
-		});
+	document.addEventListener("click", (event) => {
+		const target = event.target;
+		if (!(target instanceof Element)) {
+			return;
+		}
+		const button = target.closest("[data-lang-option]");
+		if (!button) {
+			return;
+		}
+		const lang = button.getAttribute("data-lang-option") || "en";
+		document.cookie = "argus:lang=" + lang + ";path=/;max-age=31536000;SameSite=Lax";
+		location.reload();
 	});
 </script>

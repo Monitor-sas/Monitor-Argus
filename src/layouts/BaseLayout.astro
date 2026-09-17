@@ -3,6 +3,7 @@ import { getLinguiContext } from "lingui-for-astro";
 import { t } from "lingui-for-astro/macro";
 import MonitorLogo from "../assets/monitor_logo.svg";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
+import SettingsDialog from "../components/SettingsDialog.astro";
 import ThemeSwitcher from "../components/ThemeSwitcher.astro";
 import "../styles/global.css";
 
@@ -59,6 +60,7 @@ const year = new Date().getFullYear();
 				<div class="header-controls">
 					<LanguageSwitcher lang={lang} />
 					<ThemeSwitcher />
+					<SettingsDialog />
 				</div>
 			</div>
 		</header>

@@ -56,16 +56,22 @@ const themes = [
 		});
 	}
 
-	document.querySelectorAll("[data-theme-option]").forEach((button) => {
-		button.addEventListener("click", () => {
-			const theme = button.getAttribute("data-theme-option") || "system";
-			argusApplyTheme(theme);
-			try {
-				localStorage.setItem("argus:theme", theme);
-			} catch {
-				// persistencia no disponible, se mantiene el tema en la sesion
-			}
-		});
+	document.addEventListener("click", (event) => {
+		const target = event.target;
+		if (!(target instanceof Element)) {
+			return;
+		}
+		const button = target.closest("[data-theme-option]");
+		if (!button) {
+			return;
+		}
+		const theme = button.getAttribute("data-theme-option") || "system";
+		argusApplyTheme(theme);
+		try {
+			localStorage.setItem("argus:theme", theme);
+		} catch {
+			// persistencia no disponible, se mantiene el tema en la sesion
+		}
 	});
 
 	argusApplyTheme(argusGetTheme());

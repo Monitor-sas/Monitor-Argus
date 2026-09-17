@@ -88,7 +88,7 @@ msgstr "API status"
 msgid "App ID"
 msgstr "App ID"
 
-#: src/layouts/BaseLayout.astro:15
+#: src/layouts/BaseLayout.astro:16
 msgid "ARGUS — Monitor Status"
 msgstr "ARGUS — Monitor Status"
 
@@ -110,6 +110,7 @@ msgid "Checks"
 msgstr "Checks"
 
 #: src/components/services/ServiceDetailsDialog.astro:16
+#: src/components/SettingsDialog.astro:33
 msgid "Close"
 msgstr "Close"
 
@@ -142,7 +143,7 @@ msgstr "Español"
 msgid "Follow system theme"
 msgstr "Follow system theme"
 
-#: src/layouts/BaseLayout.astro:73
+#: src/layouts/BaseLayout.astro:75
 msgid "Footer"
 msgstr "Footer"
 
@@ -188,6 +189,7 @@ msgid "just now"
 msgstr "just now"
 
 #: src/components/LanguageSwitcher.astro:16
+#: src/components/SettingsDialog.astro:42
 msgid "Language"
 msgstr "Language"
 
@@ -228,7 +230,7 @@ msgstr "Major Outage"
 msgid "Major system outage"
 msgstr "Major system outage"
 
-#: src/layouts/BaseLayout.astro:72
+#: src/layouts/BaseLayout.astro:74
 msgid "Monitor"
 msgstr "Monitor"
 
@@ -266,7 +268,15 @@ msgstr "Partial Outage"
 msgid "Platform"
 msgstr "Platform"
 
-#: src/layouts/BaseLayout.astro:16
+#: src/components/SettingsDialog.astro:13
+#: src/components/SettingsDialog.astro:14
+#: src/components/SettingsDialog.astro:20
+#: src/components/SettingsDialog.astro:23
+#: src/components/SettingsDialog.astro:27
+msgid "Preferences"
+msgstr "Preferences"
+
+#: src/layouts/BaseLayout.astro:17
 msgid "Public operational status of the Monitor platform"
 msgstr "Public operational status of the Monitor platform"
 
@@ -300,7 +310,7 @@ msgstr "Some systems are experiencing an outage"
 msgid "Some systems are experiencing degraded performance"
 msgstr "Some systems are experiencing degraded performance"
 
-#: src/layouts/BaseLayout.astro:74
+#: src/layouts/BaseLayout.astro:76
 msgid "Status"
 msgstr "Status"
 
@@ -313,7 +323,7 @@ msgstr "Status Unknown"
 msgid "System"
 msgstr "System"
 
-#: src/layouts/BaseLayout.astro:57
+#: src/layouts/BaseLayout.astro:58
 msgid "System Operational Status"
 msgstr "System Operational Status"
 
@@ -321,6 +331,7 @@ msgstr "System Operational Status"
 msgid "System status is currently unknown"
 msgstr "System status is currently unknown"
 
+#: src/components/SettingsDialog.astro:46
 #: src/components/ThemeSwitcher.astro:11
 msgid "Theme"
 msgstr "Theme"
