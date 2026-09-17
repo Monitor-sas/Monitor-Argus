@@ -1,6 +1,7 @@
 ---
 import { t } from "lingui-for-astro/macro";
 import IncidentsSection from "../components/incidents/IncidentsSection.astro";
+import ServiceDetailsDialog from "../components/services/ServiceDetailsDialog.astro";
 import ServiceGroup from "../components/services/ServiceGroup.astro";
 import StatusBanner from "../components/status/StatusBanner.astro";
 import UptimeSummary from "../components/uptime/UptimeSummary.astro";
@@ -37,6 +38,7 @@ for (const service of report.services) {
 	{[...groups.entries()].map(([name, services]) => (
 		<ServiceGroup name={displayGroupName(name)} services={services} />
 	))}
+	<ServiceDetailsDialog />
 	<UptimeSummary />
 	<IncidentsSection />
 </BaseLayout>

@@ -42,7 +42,7 @@ msgstr "{0} s"
 msgid "{ms} ms"
 msgstr "{ms} ms"
 
-#: src/components/services/ServiceGroup.astro:14
+#: src/components/services/ServiceGroup.astro:15
 msgid "{name} services"
 msgstr "Servicios de {name}"
 
@@ -55,14 +55,54 @@ msgstr "Todos los sistemas operativos"
 msgid "API {0}ms"
 msgstr "API {0}ms"
 
+#: src/components/services/ServiceDetailsPanel.astro:164
+msgid "API endpoint"
+msgstr "Endpoint de API"
+
+#: src/components/services/ServiceDetailsPanel.astro:158
+msgid "API HTTP status"
+msgstr "Estado HTTP de API"
+
+#: src/components/services/ServiceDetailsPanel.astro:152
+msgid "API latency"
+msgstr "Latencia de API"
+
+#: src/components/services/ServiceDetailsPanel.astro:147
+msgid "API reachable"
+msgstr "API accesible"
+
+#: src/components/services/ServiceDetailsPanel.astro:170
+msgid "API status"
+msgstr "Estado de API"
+
+#: src/components/services/ServiceDetailsPanel.astro:142
+msgid "App ID"
+msgstr "ID de aplicación"
+
 #: src/layouts/BaseLayout.astro:15
 msgid "ARGUS — Monitor Status"
 msgstr "ARGUS — Estado de Monitor"
+
+#: src/components/services/ServiceDetailsPanel.astro:176
+msgid "Authenticated"
+msgstr "Autenticado"
 
 #. placeholder {0}: relativeTimeLabel(d.lastHeartbeatTs)
 #: src/components/services/ServiceStatusRow.astro:71
 msgid "beat {0}"
 msgstr "latido {0}"
+
+#: src/components/services/ServiceDetailsPanel.astro:114
+msgid "Checked at"
+msgstr "Comprobado el"
+
+#: src/components/services/ServiceDetailsPanel.astro:90
+msgid "Checks"
+msgstr "Comprobaciones"
+
+#: src/components/services/ServiceDetailsDialog.astro:16
+msgid "Close"
+msgstr "Cerrar"
 
 #: src/components/ThemeSwitcher.astro:7
 msgid "Dark"
@@ -72,6 +112,7 @@ msgstr "Oscuro"
 msgid "Dark theme"
 msgstr "Tema oscuro"
 
+#: src/components/services/ServiceDetailsPanel.astro:15
 #: src/components/services/ServiceStatusRow.astro:16
 msgid "Degraded Performance"
 msgstr "Rendimiento degradado"
@@ -92,9 +133,25 @@ msgstr "Seguir el tema del sistema"
 msgid "Footer"
 msgstr "Pie de página"
 
+#: src/components/services/ServiceDetailsPanel.astro:23
+msgid "Frontend"
+msgstr "Frontend"
+
 #: src/components/services/ServiceStatusRow.astro:23
 msgid "Frontend application"
 msgstr "Aplicación frontend"
+
+#: src/components/services/ServiceDetailsPanel.astro:126
+msgid "Heartbeat"
+msgstr "Latido"
+
+#: src/components/services/ServiceDetailsPanel.astro:22
+msgid "HTTP"
+msgstr "HTTP"
+
+#: src/components/services/ServiceDetailsPanel.astro:103
+msgid "HTTP status"
+msgstr "Código HTTP"
 
 #: src/components/incidents/IncidentsSection.astro:5
 #: src/components/incidents/IncidentsSection.astro:6
@@ -105,7 +162,7 @@ msgstr "Incidencias"
 msgid "Incidents are published here when they affect service availability."
 msgstr "Las incidencias se publican aquí cuando afectan a la disponibilidad del servicio."
 
-#: src/pages/index.astro:14
+#: src/pages/index.astro:15
 msgid "Infrastructure"
 msgstr "Infraestructura"
 
@@ -117,9 +174,17 @@ msgstr "ahora mismo"
 msgid "Language"
 msgstr "Idioma"
 
+#: src/components/services/ServiceDetailsPanel.astro:80
+msgid "Last check"
+msgstr "Última comprobación"
+
 #: src/components/status/StatusBanner.astro:32
 msgid "Last checked {checkedAtText}"
 msgstr "Última comprobación: {checkedAtText}"
+
+#: src/components/services/ServiceDetailsPanel.astro:182
+msgid "Last heartbeat"
+msgstr "Último latido"
 
 #: src/components/ThemeSwitcher.astro:6
 msgid "Light"
@@ -133,6 +198,7 @@ msgstr "Tema claro"
 msgid "LoRaWAN network server"
 msgstr "Servidor de red LoRaWAN"
 
+#: src/components/services/ServiceDetailsPanel.astro:17
 #: src/components/services/ServiceStatusRow.astro:18
 msgid "Major Outage"
 msgstr "Interrupción mayor"
@@ -149,9 +215,13 @@ msgstr "Monitor"
 msgid "Monitor backend API"
 msgstr "API de backend de Monitor"
 
-#: src/pages/index.astro:31
+#: src/pages/index.astro:32
 msgid "Monitor Status"
 msgstr "Estado de Monitor"
+
+#: src/components/services/ServiceDetailsPanel.astro:63
+msgid "No"
+msgstr "No"
 
 #: src/components/incidents/IncidentsSection.astro:8
 msgid "No active incidents"
@@ -161,25 +231,45 @@ msgstr "No hay incidencias activas"
 msgid "No historical data yet"
 msgstr "Aún no hay datos históricos"
 
+#: src/components/services/ServiceDetailsPanel.astro:14
 #: src/components/services/ServiceStatusRow.astro:15
 msgid "Operational"
 msgstr "Operativo"
 
+#: src/components/services/ServiceDetailsPanel.astro:16
 #: src/components/services/ServiceStatusRow.astro:17
 msgid "Partial Outage"
 msgstr "Interrupción parcial"
+
+#: src/components/services/ServiceDetailsPanel.astro:136
+msgid "Platform"
+msgstr "Plataforma"
 
 #: src/layouts/BaseLayout.astro:16
 msgid "Public operational status of the Monitor platform"
 msgstr "Estado operativo público de la plataforma Monitor"
 
-#: src/pages/index.astro:33
+#: src/pages/index.astro:34
 msgid "Real-time operational status of the Monitor platform and its services."
 msgstr "Estado operativo en tiempo real de la plataforma Monitor y sus servicios."
 
 #: src/components/services/ServiceStatusRow.astro:25
 msgid "Real-time service"
 msgstr "Servicio en tiempo real"
+
+#: src/components/services/ServiceDetailsPanel.astro:192
+msgid "Response body"
+msgstr "Cuerpo de respuesta"
+
+#: src/components/services/ServiceDetailsPanel.astro:84
+#: src/components/services/ServiceDetailsPanel.astro:109
+msgid "Response time"
+msgstr "Tiempo de respuesta"
+
+#: src/components/services/ServiceDetailsDialog.astro:5
+#: src/components/services/ServiceDetailsDialog.astro:9
+msgid "Service details"
+msgstr "Detalles del servicio"
 
 #: src/components/status/StatusBanner.astro:17
 msgid "Some systems are experiencing an outage"
@@ -193,6 +283,7 @@ msgstr "Algunos sistemas presentan rendimiento degradado"
 msgid "Status"
 msgstr "Estado"
 
+#: src/components/services/ServiceDetailsPanel.astro:18
 #: src/components/services/ServiceStatusRow.astro:19
 msgid "Status Unknown"
 msgstr "Estado desconocido"
@@ -221,3 +312,11 @@ msgstr "Historial de tiempo de actividad"
 #: src/components/uptime/UptimeSummary.astro:10
 msgid "Uptime history will appear here once monitoring data has been collected."
 msgstr "El historial de tiempo de actividad aparecerá aquí una vez que se hayan recopilado los datos de monitoreo."
+
+#: src/components/services/ServiceDetailsPanel.astro:130
+msgid "Version"
+msgstr "Versión"
+
+#: src/components/services/ServiceDetailsPanel.astro:63
+msgid "Yes"
+msgstr "Sí"

@@ -35,6 +35,7 @@ export async function executeFrontendCheck(
 	const heartbeat = getHeartbeat("Monitor_Venus");
 
 	const details: Record<string, unknown> = {};
+	details.endpoint = check.url;
 	if (heartbeat) {
 		details.version = heartbeat.version;
 		details.platform = heartbeat.platform;
@@ -114,17 +115,21 @@ export async function executeFrontendCheck(
 	}
 
 	if (body !== "healthy") {
+		details.raw_body = body;
+		const preview = body.slice(0, 80);
 		return {
 			serviceId,
 			checkType: "frontend",
 			status: "degraded",
 			responseTimeMs,
 			statusCode: response.status,
-			error: `Unexpected health body: "${body.slice(0, 40)}"`,
+			error: `Unexpected health body: "${preview}${body.length > preview.length ? "…" : ""}"`,
 			details,
 			checkedAt,
 		};
 	}
+
+	details.raw_body = body;
 
 	const derived = heartbeatDerivedStatus(heartbeat?.api.reachable, heartbeat?.ts);
 

@@ -1,6 +1,7 @@
 ---
 import { t } from "lingui-for-astro/macro";
 import type { ServiceStatusResult } from "../../types";
+import ServiceDetailsPanel from "./ServiceDetailsPanel.astro";
 import ServiceStatusRow from "./ServiceStatusRow.astro";
 
 interface Props {
@@ -16,4 +17,9 @@ const { name, services } = Astro.props;
 	<ul class="group-card">
 		{services.map((service) => <ServiceStatusRow service={service} />)}
 	</ul>
+	{services.map((service) => (
+		<template data-details-template={service.id}>
+			<ServiceDetailsPanel service={service} />
+		</template>
+	))}
 </section>

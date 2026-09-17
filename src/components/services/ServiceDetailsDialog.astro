@@ -1,0 +1,90 @@
+---
+import { t } from "lingui-for-astro/macro";
+---
+
+<dialog class="service-dialog" data-details-dialog aria-label={t`Service details`}>
+	<div class="dialog-panel">
+		<header class="dialog-header">
+			<div class="dialog-heading">
+				<h3 class="dialog-title">{t`Service details`}</h3>
+				<p class="dialog-subtitle" data-details-caption></p>
+			</div>
+			<button
+				type="button"
+				class="dialog-close"
+				data-close-details
+				aria-label={t`Close`}
+			>
+				<svg viewBox="0 0 24 24" focusable="false">
+					<path d="M18 6 6 18M6 6l12 12" />
+				</svg>
+			</button>
+		</header>
+		<div class="dialog-body" data-details-body></div>
+	</div>
+</dialog>
+
+<script is:inline>
+	const dialog = document.querySelector("[data-details-dialog]");
+
+	function argusOpenDetails(serviceId) {
+		if (!dialog) {
+			return;
+		}
+		const template = document.querySelector(`template[data-details-template="${serviceId}"]`);
+		if (!template) {
+			return;
+		}
+		const body = dialog.querySelector("[data-details-body]");
+		if (body) {
+			body.innerHTML = template.innerHTML;
+		}
+		const opener = document.querySelector(`[data-open-details][data-service-id="${serviceId}"]`);
+		if (opener) {
+			dialog.dataset.returnFocus = serviceId;
+		}
+		if (typeof dialog.showModal === "function") {
+			dialog.showModal();
+		} else {
+			dialog.setAttribute("open", "");
+		}
+	}
+
+	function argusCloseDetails() {
+		if (!dialog) {
+			return;
+		}
+		if (typeof dialog.close === "function") {
+			dialog.close();
+		} else {
+			dialog.removeAttribute("open");
+		}
+	}
+
+	document.addEventListener("click", (event) => {
+		const opener = event.target.closest("[data-open-details]");
+		if (opener) {
+			argusOpenDetails(opener.getAttribute("data-service-id") || "");
+			return;
+		}
+		if (event.target.closest("[data-close-details]")) {
+			argusCloseDetails();
+		}
+	});
+
+	if (dialog) {
+		dialog.addEventListener("click", (event) => {
+			if (event.target === dialog) {
+				argusCloseDetails();
+			}
+		});
+		dialog.addEventListener("close", () => {
+			const returnFocus = dialog.getAttribute("data-return-focus");
+			dialog.removeAttribute("data-return-focus");
+			if (returnFocus) {
+				const opener = document.querySelector(`[data-open-details][data-service-id="${returnFocus}"]`);
+				opener?.focus();
+			}
+		});
+	}
+</script>

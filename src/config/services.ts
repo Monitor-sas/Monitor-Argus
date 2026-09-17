@@ -2,7 +2,8 @@ import type { ServiceConfig, ServiceStatus } from "../types";
 
 const atlasBaseUrl = import.meta.env.ATLAS_API_URL ?? "http://localhost:8000";
 const chirpstackBaseUrl = import.meta.env.CHIRPSTACK_URL ?? "http://localhost:8083";
-const venusHealthUrl = import.meta.env.VENUS_HEALTH_URL ?? "http://localhost:3000/health";
+const venusHealthUrl = import.meta.env.VENUS_HEALTH_URL ?? "http://localhost:3000/healthz";
+const venusHealthMetaUrl = import.meta.env.VENUS_HEALTH_META_URL ?? "http://localhost:3000/health";
 
 const upstreamStatusMapping: Record<string, ServiceStatus> = {
 	healthy: "operational",
@@ -24,6 +25,17 @@ export const services: ServiceConfig[] = [
 				type: "frontend",
 				url: venusHealthUrl,
 				timeoutMs: 8000,
+			},
+			{
+				type: "http",
+				url: venusHealthMetaUrl,
+				method: "GET",
+				timeoutMs: 8000,
+				expectedStatusCodes: [200],
+				jsonBody: {
+					statusPath: "status",
+					mapping: upstreamStatusMapping,
+				},
 			},
 		],
 	},

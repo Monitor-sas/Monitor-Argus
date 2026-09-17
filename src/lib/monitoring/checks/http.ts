@@ -85,12 +85,17 @@ export async function executeHttpCheck(
 
 		const status = classifyByStatusCode(response.status, check.expectedStatusCodes);
 
+		const details = check.captureBody
+			? await captureResponseBody(response)
+			: undefined;
+
 		return {
 			serviceId,
 			checkType: "http",
 			status,
 			responseTimeMs,
 			statusCode: response.status,
+			details,
 			checkedAt,
 		};
 	} catch (error: unknown) {

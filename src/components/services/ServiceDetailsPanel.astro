@@ -1,0 +1,196 @@
+---
+import { getLinguiContext } from "lingui-for-astro";
+import { t } from "lingui-for-astro/macro";
+import type { ServiceStatusResult } from "../../types";
+
+interface Props {
+	service: ServiceStatusResult;
+}
+
+const { service } = Astro.props;
+const { i18n } = getLinguiContext(Astro.locals);
+
+const STATUS_LABELS: Record<string, string> = {
+	operational: t`Operational`,
+	degraded: t`Degraded Performance`,
+	partial_outage: t`Partial Outage`,
+	major_outage: t`Major Outage`,
+	unknown: t`Status Unknown`,
+};
+
+const CHECK_TYPE_LABELS: Record<string, string> = {
+	http: t`HTTP`,
+	frontend: t`Frontend`,
+};
+
+const d = service.details ?? {};
+const heartbeatApi =
+	d.api_reachable !== undefined
+		? {
+				reachable: d.api_reachable as boolean,
+				latencyMs: d.api_latency_ms as number | undefined,
+				httpStatus: d.api_http_status as number | null | undefined,
+				endpoint: d.api_endpoint as string | undefined,
+				status: d.api_status as string | undefined,
+			}
+		: null;
+
+const checkedAt = service.checks.reduce((latest, check) => {
+	if (!latest || check.checkedAt > latest) {
+		return check.checkedAt;
+	}
+	return latest;
+}, "");
+
+function formatTime(iso: string): string {
+	return new Intl.DateTimeFormat(i18n.locale, {
+		dateStyle: "medium",
+		timeStyle: "medium",
+	}).format(new Date(iso));
+}
+
+function responseTime(ms: number | undefined): string | undefined {
+	if (ms === undefined) {
+		return undefined;
+	}
+	if (ms < 1000) {
+		return `${ms} ms`;
+	}
+	return `${(ms / 1000).toFixed(1)} s`;
+}
+
+function booleanLabel(value: boolean): string {
+	return value ? t`Yes` : t`No`;
+}
+---
+
+<div class="service-panel">
+	<header class="panel-header">
+		<div class="panel-heading">
+			<h3 class="panel-title">{service.name}</h3>
+			{service.description && <p class="panel-subtitle">{service.description}</p>}
+		</div>
+		<span class="status-text" data-status={service.status}>
+			{STATUS_LABELS[service.status]}
+		</span>
+	</header>
+
+	<dl class="panel-grid">
+		<div class="panel-pair">
+			<dt class="panel-term">{t`Last check`}</dt>
+			<dd class="panel-desc">{checkedAt ? formatTime(checkedAt) : "—"}</dd>
+		</div>
+		<div class="panel-pair">
+			<dt class="panel-term">{t`Response time`}</dt>
+			<dd class="panel-desc">{responseTime(service.responseTimeMs) ?? "—"}</dd>
+		</div>
+	</dl>
+
+	<section class="panel-section">
+		<h4 class="panel-section-title">{t`Checks`}</h4>
+		<ul class="checks-list">
+			{service.checks.map((check) => (
+				<li class="check-item">
+					<div class="check-head">
+						<span class="check-type">{CHECK_TYPE_LABELS[check.checkType] ?? check.checkType}</span>
+						<span class="check-status" data-status={check.status}>
+							{STATUS_LABELS[check.status] ?? check.status}
+						</span>
+					</div>
+					<dl class="check-grid">
+						{check.statusCode !== undefined && (
+							<div class="check-pair">
+								<dt class="check-term">{t`HTTP status`}</dt>
+								<dd class="check-value">{check.statusCode}</dd>
+							</div>
+						)}
+						{check.responseTimeMs !== undefined && (
+							<div class="check-pair">
+								<dt class="check-term">{t`Response time`}</dt>
+								<dd class="check-value">{responseTime(check.responseTimeMs) ?? "—"}</dd>
+							</div>
+						)}
+						<div class="check-pair">
+							<dt class="check-term">{t`Checked at`}</dt>
+							<dd class="check-value">{formatTime(check.checkedAt)}</dd>
+						</div>
+					</dl>
+					{check.error && <p class="check-error">{check.error}</p>}
+				</li>
+			))}
+		</ul>
+	</section>
+
+	{heartbeatApi && (
+		<section class="panel-section">
+			<h4 class="panel-section-title">{t`Heartbeat`}</h4>
+			<dl class="panel-grid">
+				{typeof d.version === "string" && (
+					<div class="panel-pair">
+						<dt class="panel-term">{t`Version`}</dt>
+						<dd class="panel-desc">{d.version}</dd>
+					</div>
+				)}
+				{typeof d.platform === "string" && (
+					<div class="panel-pair">
+						<dt class="panel-term">{t`Platform`}</dt>
+						<dd class="panel-desc">{d.platform}</dd>
+					</div>
+				)}
+				{typeof d.app_id === "string" && (
+					<div class="panel-pair">
+						<dt class="panel-term">{t`App ID`}</dt>
+						<dd class="panel-desc">{d.app_id}</dd>
+					</div>
+				)}
+				<div class="panel-pair">
+					<dt class="panel-term">{t`API reachable`}</dt>
+					<dd class="panel-desc">{booleanLabel(heartbeatApi.reachable)}</dd>
+				</div>
+				{heartbeatApi.latencyMs !== undefined && (
+					<div class="panel-pair">
+						<dt class="panel-term">{t`API latency`}</dt>
+						<dd class="panel-desc">{`${heartbeatApi.latencyMs} ms`}</dd>
+					</div>
+				)}
+				{heartbeatApi.httpStatus !== undefined && heartbeatApi.httpStatus !== null && (
+					<div class="panel-pair">
+						<dt class="panel-term">{t`API HTTP status`}</dt>
+						<dd class="panel-desc">{heartbeatApi.httpStatus}</dd>
+					</div>
+				)}
+				{heartbeatApi.endpoint && (
+					<div class="panel-pair">
+						<dt class="panel-term">{t`API endpoint`}</dt>
+						<dd class="panel-desc">{heartbeatApi.endpoint}</dd>
+					</div>
+				)}
+				{heartbeatApi.status && (
+					<div class="panel-pair">
+						<dt class="panel-term">{t`API status`}</dt>
+						<dd class="panel-desc">{heartbeatApi.status}</dd>
+					</div>
+				)}
+				{typeof d.auth_authenticated === "boolean" && (
+					<div class="panel-pair">
+						<dt class="panel-term">{t`Authenticated`}</dt>
+						<dd class="panel-desc">{booleanLabel(d.auth_authenticated as boolean)}</dd>
+					</div>
+				)}
+				{typeof d.lastHeartbeatTs === "string" && (
+					<div class="panel-pair">
+						<dt class="panel-term">{t`Last heartbeat`}</dt>
+						<dd class="panel-desc">{formatTime(d.lastHeartbeatTs)}</dd>
+					</div>
+				)}
+			</dl>
+		</section>
+	)}
+
+	{typeof d.raw_body === "string" && (
+		<section class="panel-section">
+			<h4 class="panel-section-title">{t`Response body`}</h4>
+			<pre class="raw-body"><code>{d.raw_body}</code></pre>
+		</section>
+	)}
+</div>
