@@ -25,6 +25,7 @@
 			"!**/dist",
 			"!**/.astro",
 			"!**/.vercel",
+			"!**/.kilo",
 			"!**/src/assets",
 			"!**/src/lib/i18n/locales"
 		]

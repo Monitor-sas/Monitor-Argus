@@ -4,17 +4,21 @@ import { resolveErrorMessage } from "./http";
 
 const STALE_AFTER_MS = 2 * 60 * 1000;
 
+// Enfoque híbrido: el estado lo decide /healthz (liveness). El latido del
+// frontend solo aporta detalles y, si llega fresca con la API inalcanzable,
+// degrada (señal de error publicada por el cliente). Nunca bloquea el estado.
 function heartbeatDerivedStatus(
 	apiReachable: boolean | undefined,
 	lastHeartbeatTs: string | undefined,
 ): { status: ServiceStatus; note?: string } {
 	if (lastHeartbeatTs === undefined) {
-		return { status: "unknown", note: "No heartbeat received" };
+		return { status: "operational", note: "No heartbeat received (liveness only)" };
 	}
 
 	const ageMs = Date.now() - Date.parse(lastHeartbeatTs);
 	if (ageMs > STALE_AFTER_MS) {
-		return { status: "degraded", note: "Heartbeat is stale" };
+		// Sin sesión activa no es una avería: solo información para el detalle.
+		return { status: "operational", note: "Heartbeat is stale" };
 	}
 	if (apiReachable === false) {
 		return { status: "degraded", note: "API reported unreachable by the client" };
