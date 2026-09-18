@@ -53,7 +53,7 @@ export const POST: APIRoute = async ({ request }) => {
 		});
 	}
 
-	saveHeartbeat(body);
+	await saveHeartbeat(body);
 	return new Response(null, { status: 204, headers: corsHeaders });
 };
 

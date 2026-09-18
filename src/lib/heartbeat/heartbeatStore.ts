@@ -1,11 +1,13 @@
 import type { HeartbeatTelemetry } from "../../types";
+import { getHeartbeatRepository } from "../persistence/heartbeat";
 
-const heartbeats = new Map<string, HeartbeatTelemetry>();
+/** Clave exacta del servicio Venus en el latido (también la que usa el check). */
+export const VENUS_HEARTBEAT_SERVICE = "Monitor_Venus";
 
-export function saveHeartbeat(telemetry: HeartbeatTelemetry): void {
-	heartbeats.set(telemetry.service, telemetry);
+export async function saveHeartbeat(telemetry: HeartbeatTelemetry): Promise<void> {
+	await getHeartbeatRepository().saveHeartbeat(telemetry);
 }
 
-export function getHeartbeat(service: string): HeartbeatTelemetry | undefined {
-	return heartbeats.get(service);
+export async function getHeartbeat(service: string): Promise<HeartbeatTelemetry | undefined> {
+	return getHeartbeatRepository().getHeartbeat(service);
 }

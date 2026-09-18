@@ -25,6 +25,7 @@
 		"@astrojs/vercel": "^11.0.10",
 		"@lingui/cli": "^6.7.0",
 		"@lingui/core": "^6.7.0",
+		"@vercel/kv": "^3.0.0",
 		"astro": "^7.3.2",
 		"lingui-for-astro": "^0.7.1"
 	},

@@ -6,6 +6,9 @@ interface ImportMetaEnv {
 	readonly VENUS_HEALTH_URL?: string;
 	readonly VENUS_HEALTH_META_URL?: string;
 	readonly STATUS_DETAILS_TOKEN?: string;
+	readonly KV_REST_API_URL?: string;
+	readonly KV_REST_API_TOKEN?: string;
+	readonly KV_REST_API_READ_ONLY_TOKEN?: string;
 }
 
 interface ImportMeta {

@@ -1,5 +1,5 @@
 import type { FrontendHealthCheck, HealthCheckResult, ServiceStatus } from "../../../types";
-import { getHeartbeat } from "../../heartbeat/heartbeatStore";
+import { getHeartbeat, VENUS_HEARTBEAT_SERVICE } from "../../heartbeat/heartbeatStore";
 import { resolveErrorMessage } from "./http";
 
 const STALE_AFTER_MS = 2 * 60 * 1000;
@@ -32,7 +32,7 @@ export async function executeFrontendCheck(
 
 	const start = performance.now();
 
-	const heartbeat = getHeartbeat("Monitor_Venus");
+	const heartbeat = await getHeartbeat(VENUS_HEARTBEAT_SERVICE);
 
 	const details: Record<string, unknown> = {};
 	details.endpoint = check.url;
